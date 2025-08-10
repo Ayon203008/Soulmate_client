@@ -73,7 +73,9 @@ const ApprovedPremium = () => {
     }
   };
 
-  if (loading) return <p className="text-center mt-10 text-gray-500">Loading requests...</p>;
+  if (loading) return ( <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      </div>)
   if (requests.length === 0) return <p className="text-center mt-10 text-gray-500">No pending premium requests.</p>;
 
   return (

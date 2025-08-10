@@ -10,7 +10,7 @@ const ApprovedContactReq = () => {
 useEffect(() => {
   axiosSecure.get('/contact-requests/all')
     .then(async res => {
-      // শুধু status approved না এমন গুলো রাখো
+      
       const filtered = res.data.filter(req => req.status !== 'approved');
 
       const enrichedRequests = await Promise.all(
@@ -42,10 +42,10 @@ useEffect(() => {
       if (res.data.success) {
         Swal.fire('Approved!', 'Contact request approved successfully.', 'success');
 
-        // Approve হওয়ার পর লিস্ট থেকে রিমুভ করা
+        
         setRequests(prev => prev.filter(r => r._id !== id));
 
-        // অন্য কম্পোনেন্টকে জানানো
+     
         window.dispatchEvent(new Event('contactRequestUpdated'));
       }
     } catch (err) {
@@ -54,7 +54,9 @@ useEffect(() => {
     }
   };
 
-  if (loading) return <p className="text-center">Loading...</p>;
+  if (loading) return ( <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      </div>);
 
   return (
     <div className="p-4">

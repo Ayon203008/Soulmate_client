@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useParams } from 'react-router';  // react-router-dom থেকে import করো
+import { useParams } from 'react-router';  
 import { AuthContext } from '../../Context/AuthContext';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
 
-const CHARGE_AMOUNT = 5; // ডাইনামিক চার্জ এখানে রাখা হয়েছে
+const CHARGE_AMOUNT = 5; 
 
 const Checkout = () => {
-  const { biodataId } = useParams();  // URL থেকে MongoDB _id পাওয়া যায়
+  const { biodataId } = useParams();  
   const { user } = useContext(AuthContext);
   const axiosSecure = UseAxiosSecure();
 
@@ -64,14 +64,14 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      // এখানে তোমার পেমেন্ট প্রসেস করার কোড থাকবে (simulate করছি)
+   
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // পেমেন্ট সফল হলে সার্ভারে রিকোয়েস্ট পাঠাও
+      
       const response = await axiosSecure.post('/contact-requests', {
         biodataId: biodataId,
         userEmail: user.email,
-        paymentAmount: CHARGE_AMOUNT,  // ডাইনামিক চার্জ পাঠানো হচ্ছে
+        paymentAmount: CHARGE_AMOUNT,  
       });
 
       if (response.data?.success) {

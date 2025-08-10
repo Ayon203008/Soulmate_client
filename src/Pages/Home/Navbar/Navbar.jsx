@@ -52,10 +52,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="p-4 dark:bg-gray-100 shadow-2xl dark:text-gray-800 mb-20">
+    <header className="sticky top-0 z-50 shadow-2xl p-4 dark:bg-gray-100  dark:text-gray-800 mb-20">
       <div className="container flex justify-between h-16 mx-auto items-center">
         <NavLink to="/" className="inline-block">
-          <div className="flex items-center gap-2 group">
+          <div className="flex items-center gap-2 group ml-10">
             {/* Icon */}
             <div className="text-rose-500 group-hover:scale-110 transition duration-300">
               <GiGloves size={48} />
@@ -68,11 +68,11 @@ const Navbar = () => {
           </div>
         </NavLink>
 
-        {/* বড় স্ক্রীনের জন্য মেনু */}
+      
         <ul className="items-stretch hidden space-x-3 lg:flex">{links}</ul>
 
-        {/* বড় স্ক্রীনের জন্য লগইন/লগআউট বাটন */}
-        <div className="items-center flex-shrink-0 hidden lg:flex gap-3">
+        
+        <div className="items-center flex-shrink-0 hidden lg:flex gap-3 mr-10">
           {user ? (
             <button
               onClick={handleLogout}
@@ -89,14 +89,14 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* ছোট স্ক্রীনের জন্য হামবার্গার আইকন */}
+      
         <button
           className="p-4 lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           {menuOpen ? (
-            // ক্রস আইকন (close)
+        
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -112,7 +112,7 @@ const Navbar = () => {
               />
             </svg>
           ) : (
-            // হামবার্গার আইকন (open)
+       
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -131,7 +131,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* ছোট স্ক্রীনের জন্য মেনু (টগল) */}
+
       {menuOpen && (
         <nav className="lg:hidden px-4 pb-4">
           <ul className="flex flex-col space-y-2">{links}</ul>

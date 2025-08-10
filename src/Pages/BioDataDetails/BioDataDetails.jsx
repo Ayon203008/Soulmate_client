@@ -74,7 +74,7 @@ const { role, loading: roleLoading } = useUserRole(user?.email);
   if (loading || !user || !biodata) {
     return (
       <div className="text-center text-xl py-20 text-gray-600">
-        Loading biodata details...
+      <div className="w-8 h-8 text-center border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
       </div>
     );
   }

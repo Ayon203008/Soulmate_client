@@ -15,7 +15,11 @@ const PremiumBioData = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center py-10 text-gray-500">Loading premium biodatas...</p>;
+  if (isLoading) return(
+     <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      </div>
+  );
   if (error) return <p className="text-center text-red-500">Error loading data: {error.message}</p>;
 
   return (

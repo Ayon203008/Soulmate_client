@@ -19,7 +19,13 @@ const SuccessStory = () => {
       });
   }, []);
 
-  if (loading) return <div className="text-center py-20 text-gray-500 text-xl">Loading success stories...</div>;
+    if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
   if (error) return <div className="text-center py-20 text-red-500 font-semibold text-xl">{error}</div>;
 
   return (

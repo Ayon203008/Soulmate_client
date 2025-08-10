@@ -45,7 +45,7 @@ const AllBioDatas = () => {
       ...prev,
       [field]: value,
     }));
-    setCurrentPage(1); // filter change এ পেজ রিসেট করবো
+    setCurrentPage(1);
   };
 
   return (
@@ -130,7 +130,7 @@ const AllBioDatas = () => {
         <h1 className="text-3xl font-bold text-gray-800 mb-8">All Biodatas</h1>
 
         {isLoading ? (
-          <p className="text-center text-gray-500 text-lg">Loading biodatas...</p>
+          <div className="w-8 h-8 text-center border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
         ) : error ? (
           <p className="text-center text-red-500 text-lg">Error loading data</p>
         ) : data?.biodatas.length === 0 ? (

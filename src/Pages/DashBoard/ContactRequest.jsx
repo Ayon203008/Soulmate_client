@@ -80,7 +80,11 @@ const ContactRequest = () => {
     }
   };
 
-  if (loading) return <p className="text-center mt-10">Loading contact requests...</p>;
+  if (loading) return (
+     <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      </div>
+  );
   if (requests.length === 0) return <p className="text-center mt-10">No contact requests found.</p>;
 
   return (

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import {AuthContext} from "../Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import { Navigate, useLocation } from "react-router"; // ✅ use react-router-dom
 
 const PrivateRoute = ({ children }) => {
@@ -8,8 +8,8 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600">
-        loading...
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
       </div>
     );
   }
