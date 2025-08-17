@@ -23,11 +23,13 @@ import SuccessStoryAdmin from "../Pages/DashBoard/SuccessStoryAdmin";
 import ForbiddenPage from "../Forbidden/ForbiddenPage";
 import Checkout from "../Pages/CheckOutPage/CheckOut";
 import AdminRoute from "./AdminRoute";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayOut,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

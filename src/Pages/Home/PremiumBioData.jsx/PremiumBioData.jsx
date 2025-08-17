@@ -16,8 +16,12 @@ const PremiumBioData = () => {
   });
 
   if (isLoading) return(
-     <div className="flex items-center justify-center min-h-screen">
-        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+     <div className="flex justify-center min-h-screen">
+       <span className="loading loading-ball loading-xs"></span>
+<span className="loading loading-ball loading-sm"></span>
+<span className="loading loading-ball loading-md"></span>
+<span className="loading loading-ball loading-lg"></span>
+<span className="loading loading-ball loading-xl"></span>
       </div>
   );
   if (error) return <p className="text-center text-red-500">Error loading data: {error.message}</p>;

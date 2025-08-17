@@ -130,7 +130,13 @@ const AllBioDatas = () => {
         <h1 className="text-3xl font-bold text-gray-800 mb-8">All Biodatas</h1>
 
         {isLoading ? (
-          <div className="w-8 h-8 text-center border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+        <div className='flex justify-center'>
+          <span className="loading loading-ball loading-xs"></span>
+<span className="loading loading-ball loading-sm"></span>
+<span className="loading loading-ball loading-md"></span>
+<span className="loading loading-ball loading-lg"></span>
+<span className="loading loading-ball loading-xl"></span>
+        </div>
         ) : error ? (
           <p className="text-center text-red-500 text-lg">Error loading data</p>
         ) : data?.biodatas.length === 0 ? (

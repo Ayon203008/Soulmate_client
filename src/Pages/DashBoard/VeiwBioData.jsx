@@ -60,7 +60,13 @@ const ViewBioData = () => {
   };
 
   if (loading)
-    return <p className="text-center mt-10 text-gray-500">Loading your biodata...</p>;
+    return <div className='flex justify-center'>
+<span className="loading loading-ball loading-xs"></span>
+<span className="loading loading-ball loading-sm"></span>
+<span className="loading loading-ball loading-md"></span>
+<span className="loading loading-ball loading-lg"></span>
+<span className="loading loading-ball loading-xl"></span>
+    </div>
   if (!biodata)
     return (
       <p className="text-center mt-10 text-red-500 font-semibold">

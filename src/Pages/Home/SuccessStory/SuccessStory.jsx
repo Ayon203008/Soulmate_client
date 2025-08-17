@@ -6,6 +6,7 @@ const SuccessStory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     axios.get('https://last-try-six-kappa.vercel.app/success-stories')
       .then(res => {
@@ -21,15 +22,19 @@ const SuccessStory = () => {
 
     if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-16 h-16 border-4 border-t-transparent border-purple-500 rounded-full animate-spin"></div>
+      <div className="flex  justify-center min-h-screen">
+        <span className="loading loading-ball loading-xs"></span>
+<span className="loading loading-ball loading-sm"></span>
+<span className="loading loading-ball loading-md"></span>
+<span className="loading loading-ball loading-lg"></span>
+<span className="loading loading-ball loading-xl"></span>
       </div>
     );
   }
   if (error) return <div className="text-center py-20 text-red-500 font-semibold text-xl">{error}</div>;
 
   return (
-    <section className="w-full bg-gradient-to-br from-rose-50 via-pink-100 to-amber-50 min-h-screen">
+    <section  className="w-full bg-gradient-to-br from-rose-50 via-pink-100 to-amber-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-20">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-pink-600 mb-16 drop-shadow-md">
           💖 Our Lovely Success Stories

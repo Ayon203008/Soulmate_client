@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaRing } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HeroBanner = () => {
+    useEffect(() => {
+    AOS.init({ duration: 1000, once: true }); // duration = animation time, once = animate once
+  }, []);
   return (
-    <section className="relative bg-gradient-to-tr from-pink-100 rounded-2xl via-rose-50 to-yellow-100 py-24 px-6 md:px-16 overflow-hidden">
+    <section className="relative bg-gradient-to-tr from-pink-100 rounded-2xl via-rose-50 to-yellow-100 py-24 px-6 md:px-16 overflow-hidden" data-aos="fade-up">
       {/* Decorative ring animation background */}
       <div className="absolute -top-10 -right-10 opacity-10 text-[300px] text-pink-300 animate-spin-slow">
         <FaRing />

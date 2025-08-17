@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
-import Swal from 'sweetalert2';
+import React, { useEffect, useState } from "react";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import Swal from "sweetalert2";
 
 const SuccessStoryAdmin = () => {
   const axiosSecure = UseAxiosSecure();
@@ -8,12 +8,13 @@ const SuccessStoryAdmin = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axiosSecure.get('/success-stories')
-      .then(res => {
+    axiosSecure
+      .get("/success-stories")
+      .then((res) => {
         setStories(res.data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         setLoading(false);
       });
@@ -22,14 +23,20 @@ const SuccessStoryAdmin = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-spinner text-pink-500 text-2xl"></span>
+        <span className="loading loading-ball loading-xs"></span>
+        <span className="loading loading-ball loading-sm"></span>
+        <span className="loading loading-ball loading-md"></span>
+        <span className="loading loading-ball loading-lg"></span>
+        <span className="loading loading-ball loading-xl"></span>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen px-4 py-10 bg-white">
-      <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Success Story Admin</h2>
+      <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
+        Success Story Admin
+      </h2>
 
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border rounded-xl shadow-md">
@@ -58,8 +65,8 @@ const SuccessStoryAdmin = () => {
                         imageUrl: story.image,
                         imageWidth: 400,
                         imageHeight: 300,
-                        imageAlt: 'Couple Image',
-                        confirmButtonColor: '#ec4899'
+                        imageAlt: "Couple Image",
+                        confirmButtonColor: "#ec4899",
                       });
                     }}
                     className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg"

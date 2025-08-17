@@ -9,7 +9,6 @@ import {
   FaPaperPlane,
   FaHeart,
   FaUsersCog,
-  FaStar,
   FaCheckCircle,
   FaChartPie,
   FaHome,
@@ -23,9 +22,12 @@ import useUserRole from "../Hooks/useUserRole";
 const SidebarLinks = () => {
   const { user } = useContext(AuthContext);
   const { isAdmin, loading } = useUserRole(user?.email);
+
+  if (loading) return null; // optional: show loader
+
   return (
     <>
-      {isAdmin && (
+      {isAdmin ? (
         <>
           <NavLink
             to="/dashboard/admin-dashboard"
@@ -38,61 +40,51 @@ const SidebarLinks = () => {
             <FaChartPie /> Admin Dashboard
           </NavLink>
 
-          <>
-            <NavLink
-              to="/dashboard/manageusers"
-              className={({ isActive }) =>
-                `flex items-center gap-3 font-medium transition ${
-                  isActive
-                    ? "text-pink-600"
-                    : "text-gray-700 hover:text-pink-600"
-                }`
-              }
-            >
-              <FaUsersCog /> Manage Users
-            </NavLink>
-            <NavLink
-              to="/dashboard/approved-contact"
-              className={({ isActive }) =>
-                `flex items-center gap-3 font-medium transition ${
-                  isActive
-                    ? "text-pink-600"
-                    : "text-gray-700 hover:text-pink-600"
-                }`
-              }
-            >
-              <FaCheckCircle /> Approved Contact Request
-            </NavLink>
-            <NavLink
-              to="/dashboard/sucessStory-admin"
-              className={({ isActive }) =>
-                `flex items-center gap-3 font-medium transition ${
-                  isActive
-                    ? "text-pink-600"
-                    : "text-gray-700 hover:text-pink-600"
-                }`
-              }
-            >
-              <FaRegLaughBeam /> Success Story Admin
-            </NavLink>
-            <NavLink
-              to="/dashboard/approved-premium"
-              className={({ isActive }) =>
-                `flex items-center gap-3 font-medium transition ${
-                  isActive
-                    ? "text-pink-600"
-                    : "text-gray-700 hover:text-pink-600"
-                }`
-              }
-            >
-              <FaRegLaughBeam /> Approved Premium
-            </NavLink>
-          </>
-        </>
-      )}
+          <NavLink
+            to="/dashboard/manageusers"
+            className={({ isActive }) =>
+              `flex items-center gap-3 font-medium transition ${
+                isActive ? "text-pink-600" : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
+            <FaUsersCog /> Manage Users
+          </NavLink>
 
-{!isAdmin && (
-       <>
+          <NavLink
+            to="/dashboard/approved-contact"
+            className={({ isActive }) =>
+              `flex items-center gap-3 font-medium transition ${
+                isActive ? "text-pink-600" : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
+            <FaCheckCircle /> Approved Contact Requests
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/sucessStory-admin"
+            className={({ isActive }) =>
+              `flex items-center gap-3 font-medium transition ${
+                isActive ? "text-pink-600" : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
+            <FaRegLaughBeam /> Success Story Admin
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/approved-premium"
+            className={({ isActive }) =>
+              `flex items-center gap-3 font-medium transition ${
+                isActive ? "text-pink-600" : "text-gray-700 hover:text-pink-600"
+              }`
+            }
+          >
+            <FaRegLaughBeam /> Approved Premium
+          </NavLink>
+        </>
+      ) : (
         <>
           <NavLink
             to="/dashboard/editdata"
@@ -104,6 +96,7 @@ const SidebarLinks = () => {
           >
             <FaUserEdit /> Edit BioData
           </NavLink>
+
           <NavLink
             to="/dashboard/view-biodata"
             className={({ isActive }) =>
@@ -125,6 +118,7 @@ const SidebarLinks = () => {
           >
             <FaHeart /> Favourite BioData
           </NavLink>
+
           <NavLink
             to="/dashboard/contact-requests"
             className={({ isActive }) =>
@@ -135,6 +129,7 @@ const SidebarLinks = () => {
           >
             <FaPaperPlane /> Contact Requests
           </NavLink>
+
           <NavLink
             to="/dashboard/got-married"
             className={({ isActive }) =>
@@ -146,13 +141,7 @@ const SidebarLinks = () => {
             <FaRing /> Got Married
           </NavLink>
         </>
-      </>
       )}
-
-
-
-
-      
     </>
   );
 };
@@ -164,37 +153,29 @@ const DashBoardLayout = () => {
 
   const handleLogOut = () => {
     SignOutUser()
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      .then(() => navigate("/"))
+      .catch((err) => console.error(err));
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <div
-        className={`sticky top-0 left-0 z-40 h-screen w-64 bg-white shadow-xl overflow-y-auto transform transition-transform duration-300 ease-in-out
-          ${
-            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:translate-x-0 md:static`}
+      <aside
+        className={`fixed top-0 left-0 z-40 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
-        <div className="h-full flex flex-col justify-between">
+        <div className="flex flex-col justify-between h-full">
           <div>
-            <div className="flex items-center gap-2 group p-6">
-              {/* Icon */}
-              <div className="text-rose-500 group-hover:scale-110 transition duration-300">
-                <GiGloves size={48} />
-              </div>
-
-              {/* Brand Text */}
-              <h1 className="text-3xl font-extrabold bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-transparent bg-clip-text tracking-wide group-hover:tracking-wider transition-all duration-300">
+            {/* Brand */}
+            <div className="flex items-center gap-2 p-6 group">
+              <GiGloves size={40} className="text-rose-500 group-hover:scale-110 transition" />
+              <h1 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-transparent bg-clip-text">
                 SoulMate
               </h1>
             </div>
-            <nav className="p-6 space-y-4">
+
+            {/* Links */}
+            <nav className="p-6 space-y-3">
               <SidebarLinks />
               <NavLink
                 to="/"
@@ -202,45 +183,43 @@ const DashBoardLayout = () => {
               >
                 <FaHome /> Home
               </NavLink>
-
               <button
                 onClick={handleLogOut}
-                className="flex items-center gap-3 text-gray-700 font-medium hover:text-red-500 transition mt-6"
+                className="flex items-center gap-3 text-gray-700 font-medium hover:text-red-500 transition mt-4"
               >
                 <FaSignOutAlt /> Logout
               </button>
             </nav>
           </div>
-
-          <div className="p-6 text-sm text-gray-500 border-t">
+          <div className="p-4 text-xs md:text-sm text-gray-500 border-t">
             © {new Date().getFullYear()} SoulMate. All rights reserved.
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Overlay for mobile */}
       {isSidebarOpen && (
         <div
+          className="fixed inset-0 z-30 bg-black bg-opacity-40 md:hidden"
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
         />
       )}
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Top Bar (Mobile only) */}
-        <div className="md:hidden flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-10">
+      {/* Main content */}
+      <div className="flex-1 flex flex-col min-h-screen md:ml-64">
+        {/* Mobile top bar */}
+        <div className="md:hidden flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-20">
           <h2 className="text-lg font-semibold text-gray-800">Dashboard</h2>
-          <button onClick={() => setSidebarOpen(!isSidebarOpen)}>
-            {isSidebarOpen ? (
-              <FaTimes className="text-xl" />
-            ) : (
-              <FaBars className="text-xl" />
-            )}
+          <button
+            onClick={() => setSidebarOpen(!isSidebarOpen)}
+            className="text-gray-800 focus:outline-none"
+          >
+            {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
 
-        <main className="p-6 md:p-10 w-full">
+        {/* Main Outlet */}
+        <main className="p-4 md:p-8 w-full">
           <Outlet />
         </main>
       </div>
