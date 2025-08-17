@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactUs = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-r from-pink-50 via-white to-yellow-50 flex items-center justify-center px-6 md:px-20 py-16">
+    <section className="mt-20 min-h-screen bg-gradient-to-r from-pink-50 via-white to-yellow-50 flex items-center justify-center px-6 md:px-20 py-16">
       <div className="max-w-4xl w-full bg-white rounded-3xl shadow-xl p-10 md:p-16">
         <h2 className="text-4xl font-extrabold text-pink-700 mb-8 text-center tracking-wide">
           Get in Touch

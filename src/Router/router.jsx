@@ -24,6 +24,7 @@ import ForbiddenPage from "../Forbidden/ForbiddenPage";
 import Checkout from "../Pages/CheckOutPage/CheckOut";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path:'/terms',
+        Component:TermsAndConditions,
       },
       {
         path: "/login",

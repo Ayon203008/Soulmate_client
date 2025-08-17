@@ -28,6 +28,7 @@ const About = () => {
         fontFamily: "'Poppins', sans-serif",
         color: '#333',
         padding: isMobile ? '50px 20px' : '0',
+      
       }}
     >
       {/* Background Lottie softly in the back */}

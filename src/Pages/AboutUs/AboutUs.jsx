@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <section className="min-h-screen bg-gradient-to-r from-pink-50 via-white to-yellow-50 flex items-center justify-center px-6 md:px-20 py-16">
+    <section className="min-h-screen mt-20 bg-gradient-to-r from-pink-50 via-white to-yellow-50 flex items-center justify-center px-6 md:px-20 py-16">
       <div className="max-w-5xl text-center">
         <h1 className="text-5xl font-extrabold text-pink-700 mb-6 tracking-wide">
           About Us
