@@ -8,18 +8,16 @@ const ManageUsers = () => {
   const [search, setSearch] = useState('');
   const [premiumRequestedIds, setPremiumRequestedIds] = useState([]);
 
-  // প্রিমিয়াম রিকোয়েস্ট করা ইউজারদের biodataId (numeric) লোড করা
   const fetchPremiumRequests = async () => {
     try {
       const res = await axiosSecure.get('/premium-requests');
-      const ids = res.data.map(req => req.biodataId); // numeric id
+      const ids = res.data.map(req => req.biodataId);
       setPremiumRequestedIds(ids);
     } catch (err) {
       console.error('Failed to fetch premium requests:', err);
     }
   };
 
-  // ইউজার লোড
   const fetchUsers = async () => {
     try {
       const res = await axiosSecure.get(`/allBiodatas?search=${search}`);
@@ -34,7 +32,6 @@ const ManageUsers = () => {
     fetchPremiumRequests();
   }, [search]);
 
-  // Make Admin with confirmation modal
   const makeAdmin = async (id) => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -60,7 +57,6 @@ const ManageUsers = () => {
     }
   };
 
-  // Make Premium with confirmation modal
   const makePremium = async (mongoId, numericId) => {
     if (!premiumRequestedIds.includes(numericId)) {
       Swal.fire('Denied', 'This user did not request premium access.', 'warning');
@@ -93,28 +89,28 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-semibold mb-6">Manage Users</h2>
+    <div className="p-4 md:p-6 bg-gray-50 min-h-screen">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-4 md:mb-6 text-center md:text-left">Manage Users</h2>
 
       <input
         type="text"
         placeholder="Search by name..."
-        className="border border-gray-300 p-2 rounded mb-6 w-full md:w-1/3"
+        className="border border-gray-300 p-2 rounded mb-4 md:mb-6 w-full md:w-1/3"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-gray-300">
+      <div className="overflow-x-auto rounded-lg shadow-md bg-white">
+        <table className="table-auto w-full min-w-[600px] md:min-w-full border-collapse">
           <thead className="bg-gray-200">
             <tr>
-              <th className="border px-4 py-2">#</th>
-              <th className="border px-4 py-2">Name</th>
-              <th className="border px-4 py-2">Email</th>
-              <th className="border px-4 py-2">Premium</th>
-              <th className="border px-4 py-2">Admin</th>
-              <th className="border px-4 py-2">Make Admin</th>
-              <th className="border px-4 py-2">Make Premium</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">#</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Name</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Email</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Premium</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Admin</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Make Admin</th>
+              <th className="border px-2 md:px-4 py-2 text-sm md:text-base">Make Premium</th>
             </tr>
           </thead>
           <tbody>
@@ -130,31 +126,31 @@ const ManageUsers = () => {
                 user.role !== 'premiumUser' && premiumRequestedIds.includes(user.id);
 
               return (
-                <tr key={user._id}>
-                  <td className="border px-4 py-2 text-center">{index + 1}</td>
-                  <td className="border px-4 py-2">{user.name || 'N/A'}</td>
-                  <td className="border px-4 py-2">{user.email || 'N/A'}</td>
-                  <td className="border px-4 py-2 text-center">
+                <tr key={user._id} className="hover:bg-gray-50">
+                  <td className="border px-2 md:px-4 py-2 text-center">{index + 1}</td>
+                  <td className="border px-2 md:px-4 py-2">{user.name || 'N/A'}</td>
+                  <td className="border px-2 md:px-4 py-2">{user.email || 'N/A'}</td>
+                  <td className="border px-2 md:px-4 py-2 text-center">
                     {user.role === 'premiumUser' ? '✅ Yes' : '❌ No'}
                   </td>
-                  <td className="border px-4 py-2 text-center">
+                  <td className="border px-2 md:px-4 py-2 text-center">
                     {user.isAdmin ? '🛡️ Admin' : '❌ No'}
                   </td>
-                  <td className="border px-4 py-2 text-center">
+                  <td className="border px-2 md:px-4 py-2 text-center">
                     {!user.isAdmin && (
                       <button
                         onClick={() => makeAdmin(user._id)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-3 py-1 rounded text-xs md:text-sm"
                       >
                         Make Admin
                       </button>
                     )}
                   </td>
-                  <td className="border px-4 py-2 text-center">
+                  <td className="border px-2 md:px-4 py-2 text-center">
                     {showPremiumButton && (
                       <button
                         onClick={() => makePremium(user._id, user.id)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
+                        className="bg-green-600 hover:bg-green-700 text-white px-2 md:px-3 py-1 rounded text-xs md:text-sm"
                       >
                         Make Premium
                       </button>
