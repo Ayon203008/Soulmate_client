@@ -49,7 +49,7 @@ const AllBioDatas = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
+    <div className=" mt-20 flex min-h-screen bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
       {/* Sidebar Filter */}
       <aside className="w-72 sticky top-0 h-screen bg-white shadow-xl border-r px-6 py-8 overflow-y-auto">
         <h2 className="text-2xl font-bold text-indigo-600 mb-6 flex items-center gap-2">
