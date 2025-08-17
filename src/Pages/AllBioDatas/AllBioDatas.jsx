@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import { FaEye, FaMale, FaFemale, FaFilter } from 'react-icons/fa';
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 
 const divisions = ["Dhaka", "Chattagram", "Rangpur", "Barisal", "Khulna", "Mymensingh", "Sylhet"];
 
 const AllBioDatas = () => {
   const axiosSecure = UseAxiosSecure();
-
   const [filters, setFilters] = useState({
     biodataType: '',
     division: '',
@@ -23,7 +22,6 @@ const AllBioDatas = () => {
     queryKey: ['allBiodatas', filters, sortOrder, currentPage],
     queryFn: async () => {
       const params = new URLSearchParams();
-
       if (filters.biodataType) params.append('biodataType', filters.biodataType);
       if (filters.division) params.append('division', filters.division);
       if (filters.minAge) params.append('minAge', filters.minAge);
@@ -41,17 +39,14 @@ const AllBioDatas = () => {
   const totalPages = data?.totalPages || 0;
 
   const handleFilterChange = (field, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFilters(prev => ({ ...prev, [field]: value }));
     setCurrentPage(1);
   };
 
   return (
-    <div className=" mt-20 flex min-h-screen bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
+    <div className=" flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
       {/* Sidebar Filter */}
-      <aside className="w-72 sticky top-0 h-screen bg-white shadow-xl border-r px-6 py-8 overflow-y-auto">
+      <aside className="md:w-72 w-full sticky top-0 md:h-screen bg-white shadow-xl border-b md:border-r px-4 md:px-6 py-6 md:py-8 overflow-y-auto">
         <h2 className="text-2xl font-bold text-indigo-600 mb-6 flex items-center gap-2">
           <FaFilter /> Filter Biodatas
         </h2>
@@ -112,10 +107,7 @@ const AllBioDatas = () => {
             <label className="block mb-1 font-medium text-gray-700">Sort by Age</label>
             <select
               value={sortOrder}
-              onChange={e => {
-                setSortOrder(e.target.value);
-                setCurrentPage(1);
-              }}
+              onChange={e => { setSortOrder(e.target.value); setCurrentPage(1); }}
               className="w-full border border-gray-300 rounded-md p-2"
             >
               <option value="asc">Ascending</option>
@@ -126,35 +118,35 @@ const AllBioDatas = () => {
       </aside>
 
       {/* Main Biodata List */}
-      <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">All Biodatas</h1>
+      <main className="flex-1 p-6 md:p-10">
+        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center md:text-left">All Biodatas</h1>
 
         {isLoading ? (
-        <div className='flex justify-center'>
-          <span className="loading loading-ball loading-xs"></span>
-<span className="loading loading-ball loading-sm"></span>
-<span className="loading loading-ball loading-md"></span>
-<span className="loading loading-ball loading-lg"></span>
-<span className="loading loading-ball loading-xl"></span>
-        </div>
+          <div className='flex justify-center mt-20'>
+            <span className="loading loading-ball loading-xs"></span>
+            <span className="loading loading-ball loading-sm"></span>
+            <span className="loading loading-ball loading-md"></span>
+            <span className="loading loading-ball loading-lg"></span>
+            <span className="loading loading-ball loading-xl"></span>
+          </div>
         ) : error ? (
-          <p className="text-center text-red-500 text-lg">Error loading data</p>
+          <p className="text-center text-red-500 text-lg mt-10">Error loading data</p>
         ) : data?.biodatas.length === 0 ? (
-          <p className="text-center text-gray-500 text-lg">No biodata found.</p>
+          <p className="text-center text-gray-500 text-lg mt-10">No biodata found.</p>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
               {data.biodatas.map(bio => (
                 <div
                   key={bio._id}
-                  className="bg-white p-6 rounded-3xl shadow-md hover:shadow-xl transition duration-300 border border-gray-100"
+                  className="bg-white p-6 rounded-3xl shadow-md hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col items-center"
                 >
                   <img
                     src={bio.profileImage}
                     alt={bio.name}
-                    className="w-28 h-28 mx-auto object-cover rounded-full border-4 border-indigo-300 shadow-md"
+                    className="w-24 h-24 md:w-28 md:h-28 object-cover rounded-full border-4 border-indigo-300 shadow-md"
                   />
-                  <h2 className="mt-4 text-center text-xl font-semibold text-gray-800">{bio.name}</h2>
+                  <h2 className="mt-4 text-center text-lg md:text-xl font-semibold text-gray-800">{bio.name}</h2>
 
                   <p className="text-center text-gray-500 text-sm">
                     Biodata ID: <span className="font-semibold">{bio.id}</span>
@@ -175,15 +167,9 @@ const AllBioDatas = () => {
                   </div>
 
                   <div className="mt-3 text-center text-sm text-gray-600 space-y-1">
-                    <p>
-                      Division: <strong>{bio.permanentDivision}</strong>
-                    </p>
-                    <p>
-                      Age: <strong>{bio.age}</strong>
-                    </p>
-                    <p>
-                      Occupation: <strong>{bio.occupation}</strong>
-                    </p>
+                    <p>Division: <strong>{bio.permanentDivision}</strong></p>
+                    <p>Age: <strong>{bio.age}</strong></p>
+                    <p>Occupation: <strong>{bio.occupation}</strong></p>
                   </div>
 
                   <div className="mt-6 text-center">
@@ -213,9 +199,7 @@ const AllBioDatas = () => {
                   key={index}
                   onClick={() => setCurrentPage(index + 1)}
                   className={`px-3 py-1 rounded border text-sm ${
-                    currentPage === index + 1
-                      ? 'bg-indigo-500 text-white'
-                      : 'bg-white hover:bg-indigo-100'
+                    currentPage === index + 1 ? 'bg-indigo-500 text-white' : 'bg-white hover:bg-indigo-100'
                   }`}
                 >
                   {index + 1}
